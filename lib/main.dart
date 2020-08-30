@@ -4,11 +4,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(PhysicsProblems());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class PhysicsProblems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,14 +42,12 @@ class _ProblemPageState extends State<ProblemPage> {
     return '$number. $text';
   }
 
+  void nextQuestion() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -64,12 +61,17 @@ class _ProblemPageState extends State<ProblemPage> {
                     if (snapshot.data != null) {
                       return Text(snapshot.data);
                     } else {
-                      return Text("loading");
+                      return CircularProgressIndicator();
                     }
                   })
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: nextQuestion,
+        tooltip: 'Next Question',
+        child: Icon(Icons.play_arrow),
       )
     );
   }
